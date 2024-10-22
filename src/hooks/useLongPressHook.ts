@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-export default function useLongPress() {
+export default function useLongPress(onClick: () => void) {
   const [action, setAction] = useState<'longpress' | 'click'>();
 
   const timerRef = useRef<number>();
@@ -8,39 +8,35 @@ export default function useLongPress() {
 
   function startPressTimer() {
     isLongPress.current = false;
-    timerRef.current = setTimeout(() => {
+    timerRef.current = setInterval(() => {
       isLongPress.current = true;
       setAction('longpress');
+      onClick();
     }, 500);
   }
 
   function handleOnClick() {
-    console.log('handleOnClick');
     if (isLongPress.current) {
-      console.log('Is long press - not continuing.');
       return;
     }
     setAction('click');
+    onClick();
   }
 
   function handleOnMouseDown() {
-    console.log('handleOnMouseDown');
     startPressTimer();
   }
 
   function handleOnMouseUp() {
-    console.log('handleOnMouseUp');
     clearTimeout(timerRef.current);
   }
 
   function handleOnTouchStart() {
-    console.log('handleOnTouchStart');
     startPressTimer();
   }
 
   function handleOnTouchEnd() {
     if (action === 'longpress') return;
-    console.log('handleOnTouchEnd');
     clearTimeout(timerRef.current);
   }
 
