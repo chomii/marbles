@@ -4,14 +4,16 @@ export default function useLongPress(onClick: () => void) {
   const [action, setAction] = useState<'longpress' | 'click'>();
 
   const timerRef = useRef<number>();
+  const intervalRef = useRef<number>();
   const isLongPress = useRef<boolean>(false);
 
   function startPressTimer() {
     isLongPress.current = false;
-    timerRef.current = setInterval(() => {
+    timerRef.current = setTimeout(() => {
       isLongPress.current = true;
       setAction('longpress');
       onClick();
+      intervalRef.current = setInterval(() => onClick(), 100);
     }, 500);
   }
 
@@ -29,16 +31,18 @@ export default function useLongPress(onClick: () => void) {
 
   function handleOnMouseUp() {
     clearTimeout(timerRef.current);
+    clearInterval(intervalRef.current);
   }
 
-  function handleOnTouchStart() {
-    startPressTimer();
-  }
+  // function handleOnTouchStart() {
+  //   startPressTimer();
+  // }
 
-  function handleOnTouchEnd() {
-    if (action === 'longpress') return;
-    clearTimeout(timerRef.current);
-  }
+  // function handleOnTouchEnd() {
+  //   if (action === 'longpress') return;
+  //   clearTimeout(timerRef.current);
+  //   clearInterval(intervalRef.current);
+  // }
 
   return {
     action,
@@ -46,8 +50,8 @@ export default function useLongPress(onClick: () => void) {
       onClick: handleOnClick,
       onMouseDown: handleOnMouseDown,
       onMouseUp: handleOnMouseUp,
-      onTouchStart: handleOnTouchStart,
-      onTouchEnd: handleOnTouchEnd,
+      // onTouchStart: handleOnTouchStart,
+      // onTouchEnd: handleOnTouchEnd,
     },
   };
 }
