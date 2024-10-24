@@ -1,4 +1,4 @@
-import { useMarblesContext } from '../../context/marblesContext';
+import { useMarblesContext } from '../../hooks/useMarbles';
 import { Button } from '../button';
 import classes from './header.module.css';
 
@@ -10,12 +10,16 @@ export const Header = () => {
 
   return (
     <div className={classes.container}>
-      <p className={classes.text}>
-        Boxes: <span>{boxes.length}</span>
-      </p>
-      <p>
-        Marbles: <span>{marblesCount}</span>
-      </p>
+      <div className={classes.textBox}>
+        <p>
+          Boxes: <span>{boxes.length}</span>
+        </p>
+      </div>
+      <div className={classes.textBox}>
+        <p>
+          Marbles: <span>{marblesCount}</span>
+        </p>
+      </div>
       <Button action={addBox}>Add new box</Button>
     </div>
   );

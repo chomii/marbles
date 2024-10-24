@@ -1,1 +1,26 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px;
+  background-color: lightgray;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
 
+.textBox {
+  min-width: 100px;
+  width: fit-content;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 12px;
+
+  p {
+    margin: auto;
+  }
+}

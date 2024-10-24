@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { createContext, PropsWithChildren, useState } from 'react';
 
 interface Box {
   count: number;
@@ -12,7 +12,9 @@ interface MarblesProviderInterface {
   decrement: (idx: number) => void;
 }
 
-const MarblesContext = createContext<MarblesProviderInterface>({} as MarblesProviderInterface);
+export const MarblesContext = createContext<MarblesProviderInterface>(
+  {} as MarblesProviderInterface
+);
 
 export const MarblesProvider = ({ children }: PropsWithChildren) => {
   const [boxes, setBoxes] = useState<Box[]>([]);
@@ -48,5 +50,3 @@ export const MarblesProvider = ({ children }: PropsWithChildren) => {
     </MarblesContext.Provider>
   );
 };
-
-export const useMarblesContext = () => useContext(MarblesContext);

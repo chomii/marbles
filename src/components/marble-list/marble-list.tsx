@@ -1,4 +1,4 @@
-import { useMarblesContext } from '../../context/marblesContext';
+import { useMarblesContext } from '../../hooks/useMarbles';
 import { HoldButton } from '../hold-button';
 import classes from './marble-list.module.css';
 
@@ -13,7 +13,7 @@ export const MarbleList = () => {
         <div key={idx} className={classes.box}>
           <div className={classes.inner}>
             <HoldButton clickAction={() => decrement(idx)}>-</HoldButton>
-            {el.count}
+            <span className={classes.count}>{el.count}</span>
             <HoldButton clickAction={() => increment(idx)}>+</HoldButton>
           </div>
           <button onClick={() => removeBox(idx)}>Remove</button>

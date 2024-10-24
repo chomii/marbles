@@ -1,15 +1,30 @@
 .box {
-  width: 250px;
-  height: 60px;
+  width: 300px;
+  padding: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: lightgray;
+  border-radius: 8px;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }
 
 .inner {
   display: flex;
+  flex: 1;
+  gap: 8px;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   margin-right: 10px;
+}
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
 }
